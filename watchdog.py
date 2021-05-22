@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from multiprocessing.connection import Listener
 from time import sleep
 import subprocess
@@ -12,7 +13,8 @@ def get_connection():
     print(f'connection accepted from {listener.last_accepted}')
     return conn
 
-countdown = 10
+WAIT_MAX = 10
+countdown = WAIT_MAX
 conn = get_connection()
 
 while True:
@@ -20,7 +22,7 @@ while True:
     try:
         if conn.poll():
             msg = conn.recv()
-            countdown = 10
+            countdown = WAIT_MAX
         else:                   # did not receive message
             msg = 'no signal'
             countdown -= 1
@@ -33,7 +35,7 @@ while True:
     if countdown <= 0 or bad_connection:
         print('kill process')
         subprocess.run(['pkill', '-f', 'hotsec.py'])
-        countdown = 5
+        countdown = WAIT_MAX
 
     if bad_connection:
         conn = get_connection()

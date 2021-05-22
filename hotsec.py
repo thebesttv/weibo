@@ -15,8 +15,8 @@ with lock:
     import requests
     import sqlite3
     import time
+    from time import sleep
     from bs4 import BeautifulSoup
-    from twisted.internet import task, reactor
     from multiprocessing.connection import Client
 
     con = sqlite3.connect(os.path.join(dir_path, 'hot-second.sqlite3'))
@@ -98,9 +98,9 @@ with lock:
         address = ('localhost', 23330)
         conn = Client(address, authkey=b'weibo watchdog')
 
-        tsk = task.LoopingCall(hot_sec)
-        tsk.start(1)
-        reactor.run()
+        while True:
+            hot_sec()
+            sleep(1)
     finally:
         print('closed')
         con.commit()
