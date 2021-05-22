@@ -1,5 +1,8 @@
 (require 'sqlite3)
 
+(eserver-register-site "/weibo"
+                       "微博热搜历史")
+
 (defcustom eserver-weibo (expand-file-name "weibo" eserver-root)
   "Root directory of weibo."
   :group 'eserver
