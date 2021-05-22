@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
+    <!-- <script src="echarts.min.js"></script> -->
+  </head>
+  <body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 800px;height:500px;"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'));
+
+      var option = {
+          title: {
+              text: ":tbt:replace:title:",
+          },
+          tooltip: {
+              trigger: 'axis', // 显示横坐标值
+          },
+          legend: {
+              data:['hits']
+          },
+          xAxis: {
+              type: 'time',
+              splitLine: {
+                  show: false
+              }
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              type: 'line',
+              data: [
+                  :tbt:replace:data:
+              ],
+          }]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>
