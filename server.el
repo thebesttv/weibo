@@ -84,7 +84,7 @@
           (buffer-string))))))
 
 (defun httpd/weibo (proc path arguments &rest args)
-  (with-httpd-buffer proc "text/html"
+  (with-httpd-buffer proc "text/html; charset=utf-8"
     (if (or (string-equal path "/weibo")
             (string-equal path "/weibo/")
             (string-equal path "/weibo/topics"))
@@ -92,5 +92,5 @@
       (insert (eserver-weibo-time-chart (file-name-base path))))))
 
 (defun httpd/weibo/time (proc path &rest args)
-  (with-httpd-buffer proc "text/plain"
+  (with-httpd-buffer proc "text/plain; charset=utf-8"
     (insert "This is weibo/time.")))
